@@ -8,7 +8,7 @@ struct Container
     float radius;
     ngl::Vec3 position;
 
-    Container() : radius(2.f),
+    Container() : radius(1.f),
                   position(ngl::Vec3::zero())
     {}
 

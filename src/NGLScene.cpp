@@ -94,3 +94,4 @@ void NGLScene::timerEvent(QTimerEvent *event_)
     m_ball[0].fall();
     update();
 }
+
