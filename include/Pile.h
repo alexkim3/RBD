@@ -6,7 +6,7 @@
 #include <ngl/Random.h>
 #include <tuple>
 
-template<typename OBJECT, std::size_t N = 10>
+template<typename OBJECT, std::size_t N = 20>
 struct Pile //collective movement of the balls
 {
     std::array<OBJECT, N> m_objects;
@@ -51,7 +51,7 @@ struct Pile //collective movement of the balls
                     continue;
                 if ((m_objects[i].position - m_objects[j].position).length() < object_.radius*2)
                 {
-                    object_.reflectedVector(i, j);
+                    //object_.reflectedVector(i, j);
                     std::cout<<"Collided " << "\n";
                 }
             }

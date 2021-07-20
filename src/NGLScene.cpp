@@ -5,8 +5,6 @@
 #include <ngl/VAOPrimitives.h>
 #include <QGuiApplication>
 #include <QMouseEvent>
-
-
 NGLScene::NGLScene() : m_ball(m_container), m_container()
 {
     setTitle( "Rigid body dynamics" );

@@ -68,6 +68,6 @@ void Ball::reflectedVector(ngl::Vec3 &moving_vec, ngl::Vec3 &reflection_plane)
                                                                (reflection_plane.m_z * reflection_plane.m_z)));
     ngl::Vec3 dot = (inversed_vec.m_x *scalar, inversed_vec.m_y * scalar, inversed_vec.m_z * scalar);
     ngl::Vec3 new_vector = dot + reflection_plane;
-    return new_vector;
+    Ball::velocity = new_vector;
 
 }
