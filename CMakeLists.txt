@@ -39,6 +39,8 @@ target_sources(${TargetName} PRIVATE ${PROJECT_SOURCE_DIR}/src/main.cpp
                         ${PROJECT_SOURCE_DIR}/include/NGLScene.h
                         ${PROJECT_SOURCE_DIR}/include/Ball.h
                         ${PROJECT_SOURCE_DIR}/include/Container.h
+                        ${PROJECT_SOURCE_DIR}/include/Pile.h
+
 
 
 )

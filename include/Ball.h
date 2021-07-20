@@ -4,26 +4,29 @@
 #include <ngl/Mat4.h>
 #include "Container.h"
 
-
 struct Ball
 {
-    ngl::Vec3 direction;
-    float speed;
+    static size_t instance_id;
+    const size_t id;
+    ngl::Vec3 velocity;
     float radius;
     ngl::Vec3 position;
+    float gravity;
+    float dampingY;
+    float dampingXZ;
 
-
-    Ball() : direction(ngl::Vec3::down()),
-                   speed(0.01f),
-                   radius(0.05f),
-                   position(ngl::Vec3::zero())
-
-    {}
+    Ball();
 
     ~Ball() = default;
 
     void fall();
-    bool collide();
+    void bounceOnY();
+    void bounceOnX();
+    void bounceOnZ();
+    void set(ngl::Vec3 &dir_, ngl::Vec3 &pos_);
+    void reflectedVector(ngl::Vec3 &moving_vec, ngl::Vec3 &reflection_plane);
+
+
 };
 
 #endif // BALL_H
