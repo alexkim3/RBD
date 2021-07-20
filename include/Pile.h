@@ -6,7 +6,7 @@
 #include <ngl/Random.h>
 #include <tuple>
 
-template<typename OBJECT, std::size_t N = 3>
+template<typename OBJECT, std::size_t N = 10>
 struct Pile //collective movement of the balls
 {
     std::array<OBJECT, N> m_objects;
@@ -49,20 +49,13 @@ struct Pile //collective movement of the balls
             {
                 if(i == j)
                     continue;
-                if ((m_objects[i].position - m_objects[j].position) < object_.radius*2)
+                if ((m_objects[i].position - m_objects[j].position).length() < object_.radius*2)
                 {
                     object_.reflectedVector(i, j);
+                    std::cout<<"Collided " << "\n";
                 }
             }
         }
-
-        /*
-        for (int i= (object_.id+1); i<m_objects.size(); ++i)
-        {
-            if ((object_.position - m_objects[i].position).length() < (object_.radius + m_objects[i].radius))
-                return true;
-        }
-        return false;*/
     }
 
     bool collisiondetectOnY(const OBJECT &object_)

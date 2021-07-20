@@ -29,7 +29,6 @@ public:
     ngl::Mat4 m_view;
     ngl::Mat4 m_projection;
 
-
     void loadMatricesToShader();
     void timerEvent(QTimerEvent *event_ = nullptr) override;
 
