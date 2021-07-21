@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent), m_ui(new Ui::MainW
     m_ui->s_mainWindowGridLayout->addWidget(m_gl,0,0,2,1);
     connect(m_ui->m_wireframe,SIGNAL(toggled(bool)),m_gl,SLOT(toggleWireframe(bool)));
     connect(m_ui->gravity, SIGNAL(valueChanged(double)), m_gl,SLOT(setGravity(double)));
+    connect(m_ui->dampingY, SIGNAL(valueChanged(double)),m_gl, SLOT(setDamping(double)));
 }
 
 

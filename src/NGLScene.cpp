@@ -6,14 +6,16 @@
 #include <QGuiApplication>
 #include <QMouseEvent>
 
+
 NGLScene::NGLScene(QWidget *_parent) : QOpenGLWidget( _parent ), m_ball(m_container), m_container()
 {
     setFocus();
     this->resize(_parent->size());
 
     m_wireframe = false;
-    m_numBalls = 4;
-    m_gravity = 0.0f;
+    //m_numBalls = 4;
+    m_gravity = 0.005f;
+    b_ball.dampingY = 0.0f;
 }
 
 NGLScene::~NGLScene()
@@ -92,12 +94,14 @@ void NGLScene::paintGL()
         loadMatricesToShader();
         ngl::VAOPrimitives::draw("Sphere");
     }
+
 }
 
 
 void NGLScene::timerEvent(QTimerEvent *event_)
 {
     m_ball.move();
+    b_ball.setGravity(m_gravity);
     update();
 }
 
@@ -118,6 +122,7 @@ void NGLScene::keyPressEvent(QKeyEvent *_event)
      m_modelPos.set(ngl::Vec3::zero());
      break;
    }
+
 
    default :
    {
@@ -141,5 +146,11 @@ void NGLScene::toggleWireframe(
 void NGLScene::setGravity(double _m_gravity)
 {
   m_gravity = _m_gravity;
+  update();
+}
+
+void NGLScene::setDamping(double _dampingY)
+{
+  b_ball.setDamping(_dampingY);
   update();
 }

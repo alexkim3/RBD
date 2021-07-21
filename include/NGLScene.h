@@ -19,8 +19,18 @@ public:
     void paintGL() override;
     void resizeGL(int _w, int _h) override;
 
-    private:
+public slots:
+    /// @brief a slot to toggle wireframe mode
+    /// @param[in] _mode the mode passed from the toggle
+    void toggleWireframe(
+                        bool _mode
+                        );
+    void setGravity(double _gravity);
+     void setDamping(double _gravity);
+
+ private:
     Pile<Ball> m_ball;
+    Ball b_ball;
     Container m_container;
     WinParams m_win;
     ngl::Mat4 m_mouseGlobalTX; //m_transform
@@ -57,13 +67,7 @@ public:
     //----------------------------------------------------------------------------------------------------------------------
     void wheelEvent(QWheelEvent *_event) override;
 
-public slots:
-    /// @brief a slot to toggle wireframe mode
-    /// @param[in] _mode the mode passed from the toggle
-    void toggleWireframe(
-                        bool _mode
-                        );
-    void setGravity(double _gravity);
+
 
 };
 

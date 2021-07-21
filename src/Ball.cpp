@@ -4,15 +4,20 @@
 
 size_t Ball::instance_id = 0;
 
-Ball::Ball() : id(++instance_id),
-               velocity(ngl::Vec3::zero()),
-               radius(2.f),
-               position(ngl::Vec3::zero()),
-               m_gravity(0.005f),
-               dampingY(0.9f),
-               dampingXZ(0.995)
+Ball::Ball() : id(++instance_id)
 {}
 
+void Ball::setGravity(double _gravity)
+{
+    m_gravity = _gravity;
+    std:: cout << "gravity: " << m_gravity << "\n";
+
+}
+
+void Ball::setDamping(double _dampingY)
+{
+   dampingY =  _dampingY;
+}
 
 void Ball::fall()
 {
@@ -27,10 +32,10 @@ void Ball::fall()
               " y: " << Ball::position.m_y <<
               " z: " << Ball::position.m_z << "\n";*/
 
-    /*
+
     std::cout <<" velocity X: " << Ball::velocity.m_x <<
               " Y: " << Ball::velocity.m_y <<
-              " Z: " << Ball::velocity.m_z << "\n";*/
+              " Z: " << Ball::velocity.m_z << "\n";
 }
 
 void Ball::set(ngl::Vec3 &dir_, ngl::Vec3 &pos_)
@@ -44,7 +49,7 @@ void Ball::set(ngl::Vec3 &dir_, ngl::Vec3 &pos_)
 
 void Ball::bounceOnY()
 {
-    std::cout<<"Bounced" << "\n";
+    //std::cout<<"Bounced" << "\n";
     Ball::velocity.m_y *= -1;
     Ball::velocity.m_y *= Ball::dampingY;
 }
@@ -61,6 +66,6 @@ void Ball::bounceOnZ()
 
 void Ball::reflectedVector()
 {
-    Ball::velocity *= -1;
+    Ball::velocity = -velocity;
     //std::cout << "reflected " << std::endl;
 }

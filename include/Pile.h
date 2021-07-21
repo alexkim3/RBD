@@ -5,9 +5,7 @@
 #include <iostream>
 #include <ngl/Random.h>
 
-const int m_amount = 6;
-
-template<typename OBJECT, std::size_t N = m_amount>
+template<typename OBJECT, std::size_t N = 4>
 struct Pile //collective movement of the balls
 {
     std::array<OBJECT, N> m_objects;
@@ -37,6 +35,8 @@ struct Pile //collective movement of the balls
             if(checkCollisionObjects(object))
                 object.reflectedVector();
             object.fall();
+
+
         }
     }
     bool checkCollisionObjects(OBJECT &object_)
@@ -51,6 +51,7 @@ struct Pile //collective movement of the balls
                 {
                     if ((m_objects[i].position - m_objects[j].position).length() < object_.radius*2)
                     {
+
                         return true;
                     }
                 }
@@ -83,12 +84,6 @@ struct Pile //collective movement of the balls
         else
             return false;
     }
-
-    int getBallAmount() const
-    {
-        return m_amount;
-    }
-
 
 };
 
