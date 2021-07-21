@@ -4,9 +4,10 @@
 #include "Container.h"
 #include <iostream>
 #include <ngl/Random.h>
-#include <tuple>
 
-template<typename OBJECT, std::size_t N = 20>
+const int m_amount = 6;
+
+template<typename OBJECT, std::size_t N = m_amount>
 struct Pile //collective movement of the balls
 {
     std::array<OBJECT, N> m_objects;
@@ -33,15 +34,12 @@ struct Pile //collective movement of the balls
                 object.bounceOnX();
             if(collisiondetectOnZ(object))
                 object.bounceOnZ();
-
-            checkCollisionObjects(object);
-
-
-
+            if(checkCollisionObjects(object))
+                object.reflectedVector();
             object.fall();
         }
     }
-    void checkCollisionObjects(const OBJECT &object_)
+    bool checkCollisionObjects(OBJECT &object_)
     {
         for (int i = 0; i<m_objects.size(); ++i)
         {
@@ -49,18 +47,22 @@ struct Pile //collective movement of the balls
             {
                 if(i == j)
                     continue;
-                if ((m_objects[i].position - m_objects[j].position).length() < object_.radius*2)
+                else
                 {
-                    //object_.reflectedVector(i, j);
-                    std::cout<<"Collided " << "\n";
+                    if ((m_objects[i].position - m_objects[j].position).length() < object_.radius*2)
+                    {
+                        return true;
+                    }
                 }
             }
         }
+        return false;
     }
+
 
     bool collisiondetectOnY(const OBJECT &object_)
     {
-        if (object_.position.m_y < -(ball_container.radius+object_.radius))
+        if (object_.position.m_y < -(ball_container.radius-object_.radius*2))
             return true;
         else
             return false;
@@ -68,7 +70,7 @@ struct Pile //collective movement of the balls
 
     bool collisiondetectOnX(const OBJECT &object_)
     {
-        if ((object_.position.m_x > (ball_container.radius-object_.radius)) || (object_.position.m_x < -(ball_container.radius+object_.radius)))
+        if ((object_.position.m_x > (ball_container.radius-object_.radius*2)) || (object_.position.m_x < -(ball_container.radius+object_.radius*2)))
             return true;
         else
             return false;
@@ -76,11 +78,18 @@ struct Pile //collective movement of the balls
 
     bool collisiondetectOnZ(const OBJECT &object_)
     {
-        if ((object_.position.m_z > (ball_container.radius-object_.radius)) || (object_.position.m_z < -(ball_container.radius+object_.radius)))
+        if ((object_.position.m_z > (ball_container.radius-object_.radius*2)) || (object_.position.m_z < -(ball_container.radius+object_.radius*2)))
             return true;
         else
             return false;
     }
+
+    int getBallAmount() const
+    {
+        return m_amount;
+    }
+
+
 };
 
 #endif // PILE_H

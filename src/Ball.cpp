@@ -8,23 +8,24 @@ Ball::Ball() : id(++instance_id),
                velocity(ngl::Vec3::zero()),
                radius(2.f),
                position(ngl::Vec3::zero()),
-               gravity(0.005f),
+               m_gravity(0.005f),
                dampingY(0.9f),
                dampingXZ(0.995)
 {}
+
 
 void Ball::fall()
 {
 
     Ball::position += Ball::velocity;
-    Ball::velocity.m_y -= Ball::gravity;
+    Ball::velocity.m_y -= Ball::m_gravity;
     Ball::velocity.m_x *= Ball::dampingXZ;
     Ball::velocity.m_z *= Ball::dampingXZ;
 
-
+/*
     std::cout << "x: " << Ball::position.m_x <<
               " y: " << Ball::position.m_y <<
-              " z: " << Ball::position.m_z << "\n";
+              " z: " << Ball::position.m_z << "\n";*/
 
     /*
     std::cout <<" velocity X: " << Ball::velocity.m_x <<
@@ -58,16 +59,8 @@ void Ball::bounceOnZ()
     Ball::velocity.m_z *= -1;
 }
 
-void Ball::reflectedVector(ngl::Vec3 &moving_vec, ngl::Vec3 &reflection_plane)
+void Ball::reflectedVector()
 {
-    ngl::Vec3 inversed_vec = (moving_vec.m_x*-1, moving_vec.m_y, moving_vec.m_z);
-    float scalar = ((inversed_vec.m_x*reflection_plane.m_x) +
-                    (inversed_vec.m_y*reflection_plane.m_y) +
-                    (inversed_vec.m_z*reflection_plane.m_z) / ((reflection_plane.m_x * reflection_plane.m_x)+
-                                                               (reflection_plane.m_y * reflection_plane.m_y)+
-                                                               (reflection_plane.m_z * reflection_plane.m_z)));
-    ngl::Vec3 dot = (inversed_vec.m_x *scalar, inversed_vec.m_y * scalar, inversed_vec.m_z * scalar);
-    ngl::Vec3 new_vector = dot + reflection_plane;
-    Ball::velocity = new_vector;
-
+    Ball::velocity *= -1;
+    //std::cout << "reflected " << std::endl;
 }

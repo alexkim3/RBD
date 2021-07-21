@@ -8,12 +8,12 @@ struct Ball
 {
     static size_t instance_id;
     const size_t id;
-    ngl::Vec3 velocity;
-    float radius;
+    ngl::Vec3 velocity = ngl::Vec3::zero();
+    float radius = 2.f;
     ngl::Vec3 position;
-    float gravity;
-    float dampingY;
-    float dampingXZ;
+    double m_gravity = 0.0f;
+    float dampingY = 0.9f;
+    float dampingXZ = 0.995f;
 
     Ball();
 
@@ -24,7 +24,11 @@ struct Ball
     void bounceOnX();
     void bounceOnZ();
     void set(ngl::Vec3 &dir_, ngl::Vec3 &pos_);
-    void reflectedVector(ngl::Vec3 &moving_vec, ngl::Vec3 &reflection_plane);
+    void reflectedVector();
+    double getGravity() const
+    {
+        return m_gravity;
+    }
 
 
 };
