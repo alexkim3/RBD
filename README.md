@@ -1,6 +1,3 @@
-# ase-cgitech-alexkim3
-ase-cgitech-alexkim3 created by GitHub Classroom
-
 
 # Spring simulation
 <em>
