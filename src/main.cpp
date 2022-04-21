@@ -1,8 +1,9 @@
 //---------------------------------------------------------------------------------
 /// @file main.cpp
+/// @author Alexandra Kim Bui
 /// @brief This code file sets up and initializes the Qt window application.
-/// @version 1.0
-/// @date 24/01/21 Updated to NCCA Coding Standard
+/// @version 3.0
+/// @date 21/07/21 Updated to NCCA Coding Standard
 /// Initial Version 28/12/20
 //---------------------------------------------------------------------------------
 

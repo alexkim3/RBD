@@ -1,71 +1,75 @@
+//---------------------------------------------------------------------------------
+/// @file Ball.cpp
+/// @author Alexandra Kim Bui
+/// @brief This code file sets up and initializes the Qt window application.
+/// @version 3.0
+/// @date 21/07/21 Updated to NCCA Coding Standard
+/// Initial Version 28/12/20
+//---------------------------------------------------------------------------------
 #include "Ball.h"
 #include "iostream"
 #include <cstdlib>
 
-size_t Ball::instance_id = 0;
+size_t Ball::s_instance_id = 0;
 
-Ball::Ball() : id(++instance_id)
+Ball::Ball() : c_id(++s_instance_id),
+               m_velocity(ngl::Vec3::zero()),
+               m_radius(2.f),
+               m_position(ngl::Vec3::zero()),
+               m_gravity(0.005f),
+               m_dampingY(0.9f),
+               m_dampingXZ(0.995)
 {}
 
-void Ball::setGravity(double _gravity)
-{
-    m_gravity = _gravity;
-    std:: cout << "gravity: " << m_gravity << "\n";
-
-}
-
-void Ball::setDamping(double _dampingY)
-{
-   dampingY =  _dampingY;
-}
 
 void Ball::fall()
 {
 
-    Ball::position += Ball::velocity;
-    Ball::velocity.m_y -= Ball::m_gravity;
-    Ball::velocity.m_x *= Ball::dampingXZ;
-    Ball::velocity.m_z *= Ball::dampingXZ;
+  m_position += m_velocity;
+  m_velocity.m_y -= m_gravity;
+  m_velocity.m_x *= m_dampingXZ;
+  m_velocity.m_z *= m_dampingXZ;
 
 /*
-    std::cout << "x: " << Ball::position.m_x <<
-              " y: " << Ball::position.m_y <<
-              " z: " << Ball::position.m_z << "\n";*/
+    std::cout << "x: " << Ball::m_position.m_x <<
+              " y: " << Ball::m_position.m_y <<
+              " z: " << Ball::m_position.m_z << "\n";*/
 
-
-    std::cout <<" velocity X: " << Ball::velocity.m_x <<
-              " Y: " << Ball::velocity.m_y <<
-              " Z: " << Ball::velocity.m_z << "\n";
+    /*
+    std::cout <<" m_velocity X: " << Ball::m_velocity.m_x <<
+              " Y: " << Ball::m_velocity.m_y <<
+              " Z: " << Ball::m_velocity.m_z << "\n";*/
 }
 
 void Ball::set(ngl::Vec3 &dir_, ngl::Vec3 &pos_)
 {
-    Ball::velocity = dir_/4;
-    //std::cout<< dir_.m_x<<" " << dir_.m_y<< " "<< dir_.m_z<< " "<< "\n";
-    Ball::position = pos_;
+  m_velocity = dir_/4;
+  //std::cout<< dir_.m_x<<" " << dir_.m_y<< " "<< dir_.m_z<< " "<< "\n";
+  m_position = pos_;
 
 
 }
 
 void Ball::bounceOnY()
 {
-    //std::cout<<"Bounced" << "\n";
-    Ball::velocity.m_y *= -1;
-    Ball::velocity.m_y *= Ball::dampingY;
+  //std::cout<<"Bounced" << "\n";
+  m_velocity.m_y *= -1;
+  m_velocity.m_y *= m_dampingY;
 }
 
 void Ball::bounceOnX()
 {
-    Ball::velocity.m_x *= -1;
+  m_velocity.m_x *= -1;
 }
 
 void Ball::bounceOnZ()
 {
-    Ball::velocity.m_z *= -1;
+  m_velocity.m_z *= -1;
 }
 
 void Ball::reflectedVector()
 {
-    Ball::velocity = -velocity;
+  m_velocity.m_x *= -1;
+  m_velocity.m_z *= -1;
     //std::cout << "reflected " << std::endl;
 }

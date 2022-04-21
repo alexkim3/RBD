@@ -101,24 +101,10 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QDoubleSpinBox" name="dampingY">
-         <property name="singleStep">
-          <double>0.010000000000000</double>
-         </property>
-         <property name="value">
-          <double>0.900000000000000</double>
-         </property>
-        </widget>
+        <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
        </item>
        <item row="0" column="1">
-        <widget class="QDoubleSpinBox" name="gravity">
-         <property name="singleStep">
-          <double>1.010000000000000</double>
-         </property>
-         <property name="value">
-          <double>0.010000000000000</double>
-         </property>
-        </widget>
+        <widget class="QDoubleSpinBox" name="m_gravity"/>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_3">

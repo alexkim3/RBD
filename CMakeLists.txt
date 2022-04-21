@@ -54,6 +54,13 @@ target_sources(${TargetName} PRIVATE ${PROJECT_SOURCE_DIR}/src/main.cpp
 )
 
 target_link_libraries(${TargetName} PRIVATE  NGL Qt5::Widgets)
+find_package(GTest CONFIG REQUIRED)
+include(GoogleTest)
+enable_testing()
+add_executable(RBDTests)
+target_sources(RBDTests PRIVATE tests/RBDTests.cpp src/Ball.cpp include/Ball.h include/Container.h include/Pile.h)
+target_link_libraries(RBDTests PRIVATE GTest::gtest GTest::gtest_main )
+gtest_discover_tests(RBDTests)
 
 add_custom_target(${TargetName}CopyShaders ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory

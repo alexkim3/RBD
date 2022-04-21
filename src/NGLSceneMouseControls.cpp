@@ -1,3 +1,9 @@
+/// \author Jonathan Macey
+/// \version 3.0
+/// \date 28/9/09 Updated to NCCA Coding standard
+/// Revision History :
+/// Initial Version 24/11/04
+
 #include "NGLScene.h"
 #include <QMouseEvent>
 
