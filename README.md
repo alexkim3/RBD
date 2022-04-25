@@ -1,5 +1,5 @@
 
-# Spring simulation
+# RBD simulator
 <em>
 Animation Software Engineering, Bournemouth University<br>
 Alexandra Kim Bui<br>
